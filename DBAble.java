@@ -17,18 +17,14 @@ public abstract class DBAble {
 			System.out.println(String.format("SELECT * FROM %s WHERE id = '%s'", this.getTableName(), this.getId()));
 			return rs.next();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 		
 		
 	};
-	// Objeleri db eklenebilir hale getirecek, her objede farklı olacağından abstract
 	public abstract String dbReady();
 	
-	// Bütün crud işlemleri, obje db'ye hazırsa aynı süreçten geçiyor
-	// Her seferinde yeniden bağlanmasın diye aşağıdakiyle bağlantı kurup buna argüman olarak geçiyorum, main'de onu çağıracam ilkin
 	public void DBCreate(Connection con) {
 		System.out.println("INSERT INTO " + this.tableName + " VALUES " + this.dbReady());
 		try {
@@ -70,7 +66,6 @@ public abstract class DBAble {
 		}
 	}
 	
-	// Her objenin tableName aynı olmayabilir, tableName hard coded değil o yüzden, ona göre bağlanacak
 	public Connection connectTo(String userName, String pwd) {
 		try {
 			Connection con = DriverManager.getConnection(this.MYSQL_SERVER + this.dbName, userName, pwd);
