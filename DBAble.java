@@ -14,7 +14,6 @@ public abstract class DBAble {
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s WHERE id = '%s'", this.getTableName(), this.getId()));
-			System.out.println(String.format("SELECT * FROM %s WHERE id = '%s'", this.getTableName(), this.getId()));
 			return rs.next();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -40,7 +39,6 @@ public abstract class DBAble {
 		if (this.isIdExist(con)) {
 			try {
 				Statement st = con.createStatement();
-				System.out.println("DELETE FROM " + this.tableName + " WHERE id = " + this.getId());
 				st.executeUpdate("DELETE FROM " + this.tableName + " WHERE id = " + this.getId());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -55,10 +53,8 @@ public abstract class DBAble {
 		if (this.isIdExist(con) && newEntry.isIdExist(con)) {
 			try {
 				Statement st = con.createStatement();
-				System.out.println("UPDATE " + this.tableName + " SET name = " + String.format("'%s' , ", newEntry.getName()) + "age = " + newEntry.getAge() + " WHERE id = " + this.getId());
 				st.executeUpdate("UPDATE " + this.tableName + " SET name = " + String.format("'%s' , ", newEntry.getName()) + "age = " + newEntry.getAge() + " WHERE id = " + this.getId());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else {
